@@ -1,0 +1,404 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री डेकोरेशन | प्रीमियम इवेंट व पार्टी डेकोरेशन</title>
+    <style>
+        :root {
+            --bg-warm-cream: #faf6f0;
+            --header-cream: #f4ede4;
+            --accent-gold: #c28835;
+            --accent-terracotta: #c85a32;
+            --text-main: #2b2118;
+            --text-muted: #7d6e63;
+            --footer-bg: #211915;
+            --footer-text: #e8ded2;
+            --border-soft: #eddcd2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-warm-cream);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background-color: var(--header-cream);
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(194, 136, 53, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-terracotta);
+            text-decoration: none;
+        }
+
+        .secret-login-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-left: 6px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0.65;
+            transition: all 0.25s ease;
+        }
+
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--accent-terracotta);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 36px 20px 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--accent-terracotta);
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 26px;
+        }
+
+        /* कार्ड लिंक स्टाइल */
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .item-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(43, 33, 24, 0.04);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+        }
+
+        .item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 26px rgba(43, 33, 24, 0.12);
+        }
+
+        .item-media-box {
+            height: 200px;
+            width: 100%;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-media-box img,
+        .item-media-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .item-details {
+            padding: 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .category-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: #faf4ed;
+            color: var(--accent-gold);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-soft);
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .item-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-soft);
+            padding-top: 14px;
+            margin-top: 8px;
+        }
+
+        .item-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-terracotta);
+        }
+
+        .btn-view {
+            background-color: var(--accent-terracotta);
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .empty-box {
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1.5px dashed var(--border-soft);
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 30px 24px;
+            border-top: 3px solid var(--accent-gold);
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        .footer-col p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            color: #d6ccc2;
+        }
+
+        .footer-col a {
+            color: #f5ebe0;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.82rem;
+            color: #9a8c82;
+        }
+        .category-filter-bar {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+    .filter-btn {
+        text-decoration: none;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid var(--accent-gold);
+        color: var(--accent-terracotta);
+        background: #ffffff;
+        transition: all 0.2s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+        background-color: var(--accent-terracotta);
+        color: #ffffff;
+        border-color: var(--accent-terracotta);
+        box-shadow: 0 4px 10px rgba(200, 90, 50, 0.2);
+    }
+    </style>
+</head>
+<body>
+
+    <!-- नेवबार -->
+    <header>
+        <div class="nav-left">
+            <a href="{% url 'home' %}" class="brand-logo">श्री</a>
+            <a href="{% url 'login' %}" class="secret-login-dot" title="ओनर लॉगिन"></a>
+        </div>
+        <div class="nav-right">
+            <div class="profile-btn" title="यूज़र प्रोफाइल">👤</div>
+        </div>
+    </header><br>
+    <div class="category-filter-bar">
+    <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">
+        🌟 सभी डेकोरेशन
+    </a>
+    <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">
+        🎂 बर्थडे पार्टी
+    </a>
+    <a href="{% url 'home' %}?cat=wedding" class="filter-btn {% if current_category == 'wedding' %}active{% endif %}">
+        💍 वेडिंग व स्टेज
+    </a>
+    <a href="{% url 'home' %}?cat=anniversary" class="filter-btn {% if current_category == 'anniversary' %}active{% endif %}">
+        🥂 एनिवर्सरी
+    </a>
+    <a href="{% url 'home' %}?cat=baby_shower" class="filter-btn {% if current_category == 'baby_shower' %}active{% endif %}">
+        🍼 बेबी शॉवर
+    </a>
+</div>
+
+    <!-- मुख्य भाग -->
+    <main>
+        <div class="section-header">
+            <h2>✨ हमारी प्रमुख डेकोरेशन सेवाएं</h2>
+            <p>किसी भी डेकोरेशन पर क्लिक करके उसकी पूरी फोटो गैलरी देखें व बुक करें</p>
+        </div>
+
+        <div class="items-grid">
+            {% for item in items %}
+            <!-- पूरे कार्ड को टच करते ही बुकिंग पेज खुलेगा -->
+            <a href="{% url 'booking_page' item.id %}" class="card-link">
+                <div class="item-card">
+
+                    <!-- मीडिया डिस्प्ले -->
+                    <div class="item-media-box">
+                        {% if item.video %}
+                            <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
+                        {% elif item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% elif item.online_url %}
+                            <img src="{{ item.online_url }}" alt="{{ item.title }}">
+                        {% else %}
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #faf4ed;">
+                                📷 कोई फोटो नहीं
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- विवरण व कीमत -->
+                    <div class="item-details">
+                        <div>
+                            <span class="category-tag">{{ item.get_category_display }}</span>
+                            <div class="item-title">{{ item.title }}</div>
+                            <div class="item-desc">{{ item.description|default:"शानदार और आकर्षक सेटअप।" }}</div>
+                        </div>
+
+                        <div class="item-footer">
+                            <div class="item-price">₹{{ item.price }}</div>
+                            <span class="btn-view">विवरण देखें &rarr;</span>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+            {% empty %}
+            <div class="empty-box">
+                <h3>अभी कोई डेकोरेशन लिस्ट नहीं है</h3>
+                <p>इन्वेंटरी सेक्शन से जो भी डेकोरेशन जुड़ेगी, वह यहाँ दिखने लगेगी।</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- फुटर -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>श्री डेकोरेशन</h4>
+                <p>बर्थडे पार्टी, शादी-विवाह, रिसेप्शन एवं सभी शुभ प्रसंगों के लिए प्रीमियम डेकोरेशन सेवा।</p>
+            </div>
+            <div class="footer-col">
+                <h4>संपर्क</h4>
+                <p><strong>पीयूष:</strong> <a href="tel:+919876543210">+91 98765 43210</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>पता</h4>
+                <p>शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)[cite: 1]</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; श्री डेकोरेशन. सर्वाधिकार सुरक्षित.
+        </div>
+    </footer>
+
+</body>
+</html>

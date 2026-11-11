@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ओनर लॉगिन | श्री डेकोरेशन</title>
+    <style>
+        :root {
+            --bg-warm: #faf6f0;
+            --card-bg: #ffffff;
+            --accent-terracotta: #c85a32;
+            --accent-gold: #c28835;
+            --text-dark: #2b2118;
+            --text-muted: #7d6e63;
+            --border-color: #eddcd2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-warm);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 360px;
+            padding: 35px 28px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(43, 33, 24, 0.06);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .brand-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-terracotta);
+            margin-bottom: 4px;
+        }
+
+        .login-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        .error-box {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            background-color: #fdfbf7;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-gold);
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-terracotta);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="brand-title">श्री डेकोरेशन</div>
+        <div class="login-sub">ओनर लॉगिन</div>
+
+        {% if error %}
+            <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <!-- action खाली छोड़ें ताकि फॉर्म इसी पेज पर POST रिक्वेस्ट भेजे -->
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username">यूज़रनेम</label>
+                <input type="text" id="username" name="username" placeholder="piyush" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">पासवर्ड</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <!-- यह सबमिट बटन सीधे POST रिक्वेस्ट फायर करेगा -->
+            <button type="submit" class="btn-submit">लॉगिन करें</button>
+        </form>
+    </div>
+
+</body>
+</html>

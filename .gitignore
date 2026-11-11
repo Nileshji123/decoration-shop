@@ -1,0 +1,17 @@
+# Virtual Environment
+env/
+venv/
+ENV/
+
+# Database
+db.sqlite3
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Media & Uploaded Files (Photos/Videos)
+media/
+
+# VS Code settings
+.vscode/

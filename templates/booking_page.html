@@ -1,0 +1,343 @@
+<!-- ========================================== -->
+<!-- BOOKING / DETAIL PAGE (templates/booking_page.html) -->
+<!-- ========================================== -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item.title }} | श्री डेकोरेशन बुकिंग</title>
+    <style>
+        :root {
+            --bg-warm-cream: #faf6f0;
+            --header-cream: #f4ede4;
+            --accent-gold: #c28835;
+            --accent-terracotta: #c85a32;
+            --text-main: #2b2118;
+            --text-muted: #7d6e63;
+            --border-soft: #eddcd2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-warm-cream);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* हेडर */
+        header {
+            background-color: var(--header-cream);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(194, 136, 53, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--accent-terracotta);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-terracotta);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        /* 1. ऑटो स्लाइडर बॉक्स */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 440px;
+            background-color: #111111;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(43, 33, 24, 0.12);
+        }
+
+        .slide-item {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-item.active {
+            display: block;
+        }
+
+        .slide-item img,
+        .slide-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        /* स्लाइडर बटन्स */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.55);
+            color: #ffffff;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .slider-btn:hover {
+            background: rgba(194, 136, 53, 0.85);
+        }
+
+        .btn-prev { left: 14px; }
+        .btn-next { right: 14px; }
+
+        .slide-badge {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* 2. डेकोरेशन डिटेल्स कार्ड */
+        .details-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: 0 4px 14px rgba(43, 33, 24, 0.04);
+        }
+
+        .cat-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: #faf4ed;
+            color: var(--accent-gold);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-soft);
+            margin-bottom: 10px;
+        }
+
+        .item-heading {
+            font-size: 1.8rem;
+            color: var(--accent-terracotta);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .price-tag {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 18px;
+        }
+
+        .description-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            white-space: pre-line;
+        }
+
+        /* 3. दुकान संपर्क व समय बॉक्स */
+        .contact-box {
+            background: #fdfaf6;
+            border-left: 4px solid var(--accent-terracotta);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-box h3 {
+            color: var(--accent-terracotta);
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+
+        /* 4. बड़ा व्हाट्सएप बुकिंग बटन */
+        .btn-whatsapp-book {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #25D366;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-whatsapp-book:hover {
+            background-color: #1eb954;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- हेडर -->
+    <header>
+        <a href="{% url 'home' %}" class="back-link">← वापस होम पेज</a>
+        <div class="brand-name">श्री डेकोरेशन</div>
+    </header>
+
+    <div class="container">
+        <!-- 1. मीडिया स्लाइडर -->
+        <div class="slider-wrapper" id="sliderWrapper">
+            
+            <!-- मुख्य वीडियो (अगर उपलब्ध है) -->
+            {% if item.video %}
+            <div class="slide-item active">
+                <video src="{{ item.video.url }}" autoplay muted playsinline></video>
+            </div>
+            {% endif %}
+
+            <!-- मुख्य इमेज -->
+            {% if item.image %}
+            <div class="slide-item {% if not item.video %}active{% endif %}">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+            </div>
+            {% endif %}
+
+            <!-- ऑनलाइन URL इमेज (यदि दी गई हो) -->
+            {% if item.online_url %}
+            <div class="slide-item {% if not item.video and not item.image %}active{% endif %}">
+                <img src="{{ item.online_url }}" alt="{{ item.title }}">
+            </div>
+            {% endif %}
+
+            <!-- गैलरी की अतिरिक्त 5-10 फोटो/वीडियो -->
+            {% for media in item.gallery.all %}
+            <div class="slide-item">
+                {% if media.is_video %}
+                    <video src="{{ media.file.url }}" muted playsinline></video>
+                {% else %}
+                    <img src="{{ media.file.url }}" alt="Gallery Image">
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <!-- स्लाइडर बटन -->
+            <button class="slider-btn btn-prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="slider-btn btn-next" onclick="moveSlide(1)">&#10095;</button>
+            
+            <div class="slide-badge" id="slideCount">1 / 1</div>
+        </div>
+
+        <!-- 2. डेकोरेशन डिटेल्स -->
+        <div class="details-card">
+            <span class="cat-tag">{{ item.get_category_display }}</span>
+            <h1 class="item-heading">{{ item.title }}</h1>
+            <div class="price-tag">₹{{ item.price }}</div>
+            <p class="description-text">{{ item.description|default:"शानदार और आकर्षक सेटअप।" }}</p>
+
+            <!-- 3. संपर्क व पता -->
+            <div class="contact-box">
+                <h3>📍 दुकान व बुकिंग जानकारी</h3>
+                <p><strong>दुकान का नाम:</strong> श्री डेकोरेशन</p>
+                <p><strong>पता:</strong> शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)[cite: 1]</p>
+                <p><strong>कॉल / संपर्क:</strong> +91 98765 43210</p>
+                <p><strong>समय:</strong> सुबह 9:00 AM से रात 9:30 PM</p>
+            </div>
+
+            <!-- 4. व्हाट्सएप बुकिंग -->
+            <a href="https://wa.me/919876543210?text=नमस्ते%20श्री%20डेकोरेशन,%20मुझे%20'{{ item.title }}'%20(प्राइस:%20₹{{ item.price }})%20डेकोरेशन%20बुक%20करनी%20है।" 
+               target="_blank" 
+               class="btn-whatsapp-book">
+                💬 व्हाट्सएप पर सीधे बुक करें
+            </a>
+        </div>
+    </div>
+
+    <!-- ऑटोमैटिक 3 सेकंड स्लाइडर स्क्रिप्ट -->
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide-item');
+        const badge = document.getElementById('slideCount');
+        let autoTimer;
+
+        function updateSlider(index) {
+            if (slides.length === 0) return;
+
+            // सारे स्लाइड्स हाइड करें और वीडियो पॉज़ करें
+            slides.forEach((s) => {
+                s.classList.remove('active');
+                const v = s.querySelector('video');
+                if (v) { v.pause(); v.currentTime = 0; }
+            });
+
+            // इंडेक्स बाउंड्स
+            if (index >= slides.length) slideIndex = 0;
+            else if (index < 0) slideIndex = slides.length - 1;
+            else slideIndex = index;
+
+            const current = slides[slideIndex];
+            current.classList.add('active');
+            badge.innerText = `${slideIndex + 1} / ${slides.length}`;
+
+            // ऑटो टाइमर (अगर वीडियो है तो वीडियो पूरा चलने दें, फोटो है तो 3 सेकंड बाद बदले)
+            clearTimeout(autoTimer);
+            const currentVid = current.querySelector('video');
+            if (currentVid) {
+                currentVid.play();
+                currentVid.onended = () => { moveSlide(1); };
+            } else {
+                autoTimer = setTimeout(() => { moveSlide(1); }, 3000);
+            }
+        }
+
+        function moveSlide(step) {
+            updateSlider(slideIndex + step);
+        }
+
+        // शुरू करें
+        updateSlider(0);
+    </script>
+</body>
+</html>
