@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ujmw8g5-#jp&ps3iumix_(0(^q+xx9o0uxv957f#b2by5mk=^$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'decoration_shop.urls'
@@ -124,3 +125,4 @@ STATICFILES_DIRS = [
 # Media files (Uploaded images & uploaded videos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
