@@ -1,14 +1,10 @@
-from django.shortcuts import render, redirect
-from .models import Inventory
 from django.shortcuts import render, redirect, get_object_or_404
-
-
+from decor_app.models import Inventory
 
 OWNER_USER = "piyush"
 OWNER_PASS = "piyush123"
 
 # 1. मुख्य होमपेज (जहाँ पब्लिक को सारी एक्टिव इन्वेंटरी दिखेगी)
-
 def home(request):
     # URL से चुनी हुई कैटेगरी निकालें (उदा: ?cat=birthday)
     category_slug = request.GET.get('cat')
@@ -45,33 +41,54 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 # 4. इन्वेंटरी पेज (अपलोड फॉर्म + डेटाबेस लिस्टिंग)
+from django.shortcuts import render, redirect
+from .models import Inventory, DecorationMedia
+
+from django.shortcuts import render, redirect
+from .models import Inventory, DecorationMedia
+
 def inventory_view(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         price = request.POST.get('price')
         category = request.POST.get('category')
-        online_url = request.POST.get('online_url')
-        description = request.POST.get('description')
-
-        # फाइल्स पकड़ना
         image = request.FILES.get('image')
         video = request.FILES.get('video')
+        online_url = request.POST.get('online_url')
+        description = request.POST.get('description')
+        
+        gallery_files = request.FILES.getlist('gallery_images')
+        
+        # Agar main image nahi di hai, toh gallery ki pehli image ko hi main image bana lo
+        if not image and gallery_files:
+            for f in gallery_files:
+                if not f.name.lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm')):
+                    image = f
+                    break
 
-        # डेटाबेस में नई रो क्रिएट करना
-        if title and price:
-            Inventory.objects.create(
-                title=title,
-                price=price,
-                category=category,
-                image=image,
-                video=video,
-                online_url=online_url,
-                description=description
+        # 1. Inventory item save karein
+        item = Inventory.objects.create(
+            title=title,
+            price=price,
+            category=category,
+            image=image,
+            video=video,
+            online_url=online_url,
+            description=description
+        )
+        
+        # 2. Saari files/videos gallery me save karein
+        for f in gallery_files:
+            is_vid = f.name.lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm'))
+            DecorationMedia.objects.create(
+                inventory=item,
+                media_file=f,
+                is_video=is_vid
             )
-            return redirect('inventory')
-
-    # डेटाबेस से सारी इन्वेंटरी निकाल कर पेज को भेजना
-    items = Inventory.objects.all().order_by('-created_at')
+            
+        return redirect('inventory')
+        
+    items = Inventory.objects.all().order_by('-id')
     return render(request, 'inventory.html', {'items': items})
 
 # बुकिंग / डिटेल पेज का फंक्शन

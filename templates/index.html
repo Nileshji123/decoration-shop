@@ -46,6 +46,12 @@
             z-index: 100;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .brand-logo {
             font-size: 1.6rem;
             font-weight: 800;
@@ -57,7 +63,6 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            margin-left: 6px;
             background-color: var(--accent-gold);
             border-radius: 50%;
             cursor: pointer;
@@ -88,6 +93,35 @@
             padding: 36px 20px 60px;
         }
 
+        .category-filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+
+        .filter-btn {
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-terracotta);
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--accent-terracotta);
+            color: #ffffff;
+            border-color: var(--accent-terracotta);
+            box-shadow: 0 4px 10px rgba(200, 90, 50, 0.2);
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 35px;
@@ -110,7 +144,6 @@
             gap: 26px;
         }
 
-        /* कार्ड लिंक स्टाइल */
         .card-link {
             text-decoration: none;
             color: inherit;
@@ -127,7 +160,6 @@
             flex-direction: column;
             height: 100%;
             transition: transform 0.25s, box-shadow 0.25s;
-            cursor: pointer;
         }
 
         .item-card:hover {
@@ -269,31 +301,16 @@
             font-size: 0.82rem;
             color: #9a8c82;
         }
-        .category-filter-bar {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 30px;
-    }
-    .filter-btn {
-        text-decoration: none;
-        padding: 8px 18px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        border: 1px solid var(--accent-gold);
-        color: var(--accent-terracotta);
-        background: #ffffff;
-        transition: all 0.2s ease;
-    }
-    .filter-btn:hover,
-    .filter-btn.active {
-        background-color: var(--accent-terracotta);
-        color: #ffffff;
-        border-color: var(--accent-terracotta);
-        box-shadow: 0 4px 10px rgba(200, 90, 50, 0.2);
-    }
+
+        /* मोबाइल स्क्रीन रिस्पॉन्सिव */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 15px;
+            }
+            .brand-logo {
+                font-size: 1.4rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -301,30 +318,34 @@
     <!-- नेवबार -->
     <header>
         <div class="nav-left">
-            <a href="{% url 'home' %}" class="brand-logo">श्री</a>
+            <a href="{% url 'home' %}" class="brand-logo">श्री डेकोरेशन</a>
             <a href="{% url 'login' %}" class="secret-login-dot" title="ओनर लॉगिन"></a>
         </div>
         <div class="nav-right">
             <div class="profile-btn" title="यूज़र प्रोफाइल">👤</div>
         </div>
-    </header><br>
-    <div class="category-filter-bar">
-    <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">
-        🌟 सभी डेकोरेशन
-    </a>
-    <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">
-        🎂 बर्थडे पार्टी
-    </a>
-    <a href="{% url 'home' %}?cat=wedding" class="filter-btn {% if current_category == 'wedding' %}active{% endif %}">
-        💍 वेडिंग व स्टेज
-    </a>
-    <a href="{% url 'home' %}?cat=anniversary" class="filter-btn {% if current_category == 'anniversary' %}active{% endif %}">
-        🥂 एनिवर्सरी
-    </a>
-    <a href="{% url 'home' %}?cat=baby_shower" class="filter-btn {% if current_category == 'baby_shower' %}active{% endif %}">
-        🍼 बेबी शॉवर
-    </a>
-</div>
+    </header>
+
+    <!-- कैटेगरी फिल्टर बार -->
+    <div style="margin-top: 25px;">
+        <div class="category-filter-bar">
+            <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">
+                🌟 सभी डेकोरेशन
+            </a>
+            <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">
+                🎂 बर्थडे पार्टी
+            </a>
+            <a href="{% url 'home' %}?cat=wedding" class="filter-btn {% if current_category == 'wedding' %}active{% endif %}">
+                💍 वेडिंग व स्टेज
+            </a>
+            <a href="{% url 'home' %}?cat=anniversary" class="filter-btn {% if current_category == 'anniversary' %}active{% endif %}">
+                🥂 एनिवर्सरी
+            </a>
+            <a href="{% url 'home' %}?cat=baby_shower" class="filter-btn {% if current_category == 'baby_shower' %}active{% endif %}">
+                🍼 बेबी शॉवर
+            </a>
+        </div>
+    </div>
 
     <!-- मुख्य भाग -->
     <main>
@@ -340,19 +361,23 @@
                 <div class="item-card">
 
                     <!-- मीडिया डिस्प्ले -->
-                    <div class="item-media-box">
-                        {% if item.video %}
-                            <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
-                        {% elif item.image %}
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                        {% elif item.online_url %}
-                            <img src="{{ item.online_url }}" alt="{{ item.title }}">
-                        {% else %}
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #faf4ed;">
-                                📷 कोई फोटो नहीं
-                            </div>
-                        {% endif %}
-                    </div>
+                    <!-- मीडिया डिस्प्ले -->
+<div class="item-media-box">
+    {% if item.video %}
+        <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
+    {% elif item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+    {% elif item.gallery.all %}
+        <!-- अगर मुख्य फोटो नहीं है, तो गैलरी की पहली फोटो होम पेज पर दिखेगी -->
+        <img src="{{ item.gallery.first.media_file.url }}" alt="{{ item.title }}">
+    {% elif item.online_url %}
+        <img src="{{ item.online_url }}" alt="{{ item.title }}">
+    {% else %}
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #faf4ed;">
+            📷 कोई फोटो नहीं
+        </div>
+    {% endif %}
+</div>
 
                     <!-- विवरण व कीमत -->
                     <div class="item-details">
@@ -392,7 +417,7 @@
             </div>
             <div class="footer-col">
                 <h4>पता</h4>
-                <p>शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)[cite: 1]</p>
+                <p>शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)</p>
             </div>
         </div>
         <div class="footer-bottom">

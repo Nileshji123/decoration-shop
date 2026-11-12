@@ -3,222 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>इन्वेंटरी मैनेजमेंट | श्री डेकोरेशन</title>
+    <title>श्री डेकोरेशन - इन्वेंटरी कंट्रोल पैनल</title>
     <style>
         :root {
-            --bg-base: #faf6f0;
-            --card-bg: #ffffff;
-            --accent-terracotta: #c85a32;
-            --accent-gold: #c28835;
-            --text-dark: #2b2118;
-            --text-muted: #7d6e63;
-            --border-soft: #eddcd2;
-            --sidebar-bg: #211915;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #334155;
         }
 
         body {
-            background-color: var(--bg-base);
-            color: var(--text-dark);
-            min-height: 100vh;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
             display: flex;
         }
 
+        /* Sidebar Styling */
         aside {
-            width: 250px;
-            background-color: var(--sidebar-bg);
-            color: #f5ebe0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 24px 18px;
-            position: fixed;
+            width: 260px;
+            background-color: var(--card-bg);
             height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .side-brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--accent-gold);
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 30px;
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .side-nav {
             list-style: none;
-            margin-top: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 0;
+        }
+
+        .side-nav li {
+            margin-bottom: 15px;
         }
 
         .side-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #d6ccc2;
+            color: var(--text-main);
             text-decoration: none;
-            padding: 12px 16px;
+            display: block;
+            padding: 10px 15px;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
+            transition: 0.3s;
         }
 
         .side-nav a:hover, .side-nav a.active {
-            background-color: var(--accent-terracotta);
-            color: #ffffff;
+            background-color: var(--accent);
+            color: white;
         }
 
+        /* Main Content Wrapper */
         .main-wrapper {
-            margin-left: 250px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            margin-left: 260px;
+            padding: 30px;
+            width: calc(100% - 260px);
+            box-sizing: border-box;
         }
 
         header {
-            background: var(--card-bg);
-            padding: 16px 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-soft);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            margin-bottom: 30px;
         }
 
         .header-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-terracotta);
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .btn-back {
-            text-decoration: none;
-            color: var(--accent-gold);
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: 1px solid var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 6px;
-        }
-
-        .content-area {
-            padding: 30px 36px;
-        }
-
-        .panel-box {
             background: var(--card-bg);
-            border-radius: 14px;
-            border: 1px solid var(--border-soft);
-            box-shadow: 0 4px 16px rgba(43, 33, 24, 0.04);
-            padding: 26px;
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Panel Box & Forms */
+        .panel-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
             margin-bottom: 30px;
         }
 
         .panel-heading {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-terracotta);
+            font-size: 18px;
+            font-weight: bold;
             margin-bottom: 20px;
-            border-left: 4px solid var(--accent-gold);
-            padding-left: 10px;
+            color: var(--accent);
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .col-full { grid-column: span 3; }
-
-        label {
+        .form-grid label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
         }
 
-        input[type="text"], input[type="number"], input[type="url"], select, textarea {
+        .form-grid input, .form-grid select, .form-grid textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid var(--border-soft);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
-            background-color: #fdfbf7;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-gold);
-            background-color: #ffffff;
-        }
-
-        .file-box {
-            border: 1.5px dashed var(--border-soft);
             padding: 10px;
-            border-radius: 8px;
-            background: #faf6f0;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: white;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .file-box input {
+            padding: 6px;
+        }
+
+        .col-full {
+            grid-column: 1 / -1;
         }
 
         .btn-submit {
-            background-color: var(--accent-terracotta);
-            color: #ffffff;
+            margin-top: 20px;
+            background-color: var(--accent);
+            color: white;
             border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 15px;
+            transition: 0.3s;
         }
 
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Tables */
         .table-responsive {
             overflow-x: auto;
-            margin-top: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         th {
-            background-color: #f5eee6;
-            padding: 12px 14px;
-            text-align: left;
-            font-size: 0.88rem;
-            border-bottom: 2px solid var(--border-soft);
-        }
-
-        td {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border-soft);
-            font-size: 0.88rem;
-            vertical-align: middle;
+            color: var(--text-muted);
         }
 
         .item-thumb {
-            width: 55px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 6px;
-            border: 1px solid var(--border-soft);
         }
 
         .price-badge {
-            color: var(--accent-gold);
-            font-weight: 800;
+            color: #10b981;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -243,9 +211,9 @@
 
         <main class="content-area">
             
-            <!-- फॉर्म: डेटाबेस में 7 फ़ील्ड्स सेव करने के लिए -->
+            <!-- फॉर्म: डेटाबेस में नए आइटम और मल्टीपल मीडिया जोड़ने के लिए -->
             <div class="panel-box">
-                <div class="panel-heading">नया डेकोरेशन जोड़ें</div>
+                <div class="panel-heading">नया डेकोरेशन आइटम जोड़ें</div>
                 <form method="POST" action="{% url 'inventory' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-grid">
@@ -260,23 +228,27 @@
                         <div>
                             <label>इवेंट प्रकार (Category)</label>
                             <select name="category">
-                                <option value="birthday">बर्थडे पार्टी</option>
-                                <option value="wedding">वेडिंग व स्टेज</option>
-                                <option value="anniversary">एनिवर्सरी</option>
-                                <option value="baby_shower">बेबी शॉवर</option>
+                                <option value="birthday">बर्थडे पार्टी (Birthday)</option>
+                                <option value="wedding">वेडिंग व स्टेज (Wedding)</option>
+                                <option value="anniversary">एनिवर्सरी (Anniversary)</option>
+                                <option value="baby_shower">बेबी शॉवर / नामकरण</option>
                             </select>
                         </div>
                         <div>
-                            <label>📷 फोटो चुनें</label>
+                            <label>📷 मुख्य फोटो</label>
                             <div class="file-box"><input type="file" name="image" accept="image/*"></div>
                         </div>
                         <div>
-                            <label>🎥 वीडियो क्लिप</label>
+                            <label>🎥 मुख्य वीडियो क्लिप</label>
                             <div class="file-box"><input type="file" name="video" accept="video/*"></div>
                         </div>
                         <div>
                             <label>🌐 ऑनलाइन इमेज लिंक (URL)</label>
                             <input type="url" name="online_url" placeholder="https://...">
+                        </div>
+                        <div class="col-full">
+                            <label>🖼️ गैलरी के लिए मल्टीपल फ़ोटो / वीडियो (Multiple Files)</label>
+                            <div class="file-box"><input type="file" name="gallery_images" accept="image/*,video/*" multiple></div>
                         </div>
                         <div class="col-full">
                             <label>विवरण (Description)</label>
@@ -287,7 +259,7 @@
                 </form>
             </div>
 
-            <!-- डेटाबेस से आई लिस्टिंग -->
+            <!-- डेटाबेस से आई मौजूदा इन्वेंटरी लिस्ट -->
             <div class="panel-box">
                 <div class="panel-heading">मौजूदा इन्वेंटरी लिस्ट (डेटाबेस रिकॉर्ड्स)</div>
                 <div class="table-responsive">
@@ -307,6 +279,9 @@
                                 <td>
                                     {% if item.image %}
                                         <img src="{{ item.image.url }}" class="item-thumb" alt="Decor">
+                                    {% elif item.gallery.all %}
+                                        <!-- अगर मुख्य फोटो नहीं है, तो गैलरी की पहली फोटो थंबनेल में दिखेगी -->
+                                        <img src="{{ item.gallery.first.media_file.url }}" class="item-thumb" alt="Decor">
                                     {% elif item.online_url %}
                                         <img src="{{ item.online_url }}" class="item-thumb" alt="Decor">
                                     {% else %}

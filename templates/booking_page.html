@@ -256,13 +256,12 @@
             {% for media in item.gallery.all %}
             <div class="slide-item">
                 {% if media.is_video %}
-                    <video src="{{ media.file.url }}" muted playsinline></video>
+                    <video src="{{ media.media_file.url }}" muted playsinline></video>
                 {% else %}
-                    <img src="{{ media.file.url }}" alt="Gallery Image">
+                    <img src="{{ media.media_file.url }}" alt="Gallery Image">
                 {% endif %}
             </div>
             {% endfor %}
-
             <!-- स्लाइडर बटन -->
             <button class="slider-btn btn-prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="slider-btn btn-next" onclick="moveSlide(1)">&#10095;</button>
