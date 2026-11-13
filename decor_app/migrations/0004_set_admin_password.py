@@ -14,7 +14,7 @@ def update_admin_password(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('decor_app', '0003_decoration_item_etc'),  # Yahan apni sabse last wali migration file ka exact naam daal dena jo screen par dikh rahi hai
+        ('decor_app', '0004_decoration_item_etc'),  # Yahan apni sabse last wali migration file ka exact naam daal dena jo screen par dikh rahi hai
     ]
 
     operations = [
