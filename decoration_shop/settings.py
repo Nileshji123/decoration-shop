@@ -134,6 +134,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Cloudinary कॉन्फ़िगरेशन
+# Cloudinary कॉन्फ़िगरेशन
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'lvrwl6oe',
+    'API_KEY': '928498621819437',
+    'API_SECRET': 'ukeuiDEZLG_bsO-XWrGjSLK4Pqk'
+}
+
 cloudinary.config(
     cloud_name = "lvrwl6oe",
     api_key = "928498621819437",
