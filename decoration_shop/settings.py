@@ -137,6 +137,7 @@ cloudinary.config(
     api_key = "928498621819437",
     api_secret = "ukeuiDEZLG_bsO-XWrGjSLK4Pqk"
 )
+# Cloudinary कॉन्फ़िगरेशन
 
 # मीडिया फाइल्स को सीधे क्लाउड पर सेव करने के लिए
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
