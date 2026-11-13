@@ -9,13 +9,13 @@ def update_admin_password(apps, schema_editor):
         user.is_staff = True
         user.save()
     except User.DoesNotExist:
-        User.objects.create_superuser('piyush', 'admin@example.com', 'Piyush@98765')
+        User.objects.create_superuser('piyush', 'sankadiyan@gmail.com', 'Piyush@98765')
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('decor_app', '0004_decoration_item_etc'),  # Yahan apni sabse last wali migration file ka exact naam daal dena jo screen par dikh rahi hai
-    ]
+        ('decor_app', '0003_decoration_item_etc'),  # यहाँ अपनी तीसरी वाली फाइल का exact नाम लिख दे
+    ],
 
     operations = [
         migrations.RunPython(update_admin_password),
