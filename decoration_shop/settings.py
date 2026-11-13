@@ -14,6 +14,7 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -157,4 +158,13 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
+}
+
+import os
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600
+    )
 }
