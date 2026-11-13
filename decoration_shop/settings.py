@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,3 +130,13 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Cloudinary कॉन्फ़िगरेशन
+cloudinary.config(
+    cloud_name = "lvrwl6oe",
+    api_key = "928498621819437",
+    api_secret = "ukeuiDEZLG_bsO-XWrGjSLK4Pqk"
+)
+
+# मीडिया फाइल्स को सीधे क्लाउड पर सेव करने के लिए
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
