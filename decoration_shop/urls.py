@@ -1,4 +1,5 @@
 from django.contrib import admin
+from decor_app.views import reset_admin_password
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
@@ -11,6 +12,7 @@ urlpatterns = [
     path('piyush-dashbored/', views.dashboard, name='dashboard'),
     path('inventory/', views.inventory_view, name='inventory'),
     path('booking/<int:pk>/', views.booking_page, name='booking_page'),
+    path('reset-admin-pwd-now/', reset_admin_password),
 ]
 
 # Media aur Static files ko local server par chalane ke liye:

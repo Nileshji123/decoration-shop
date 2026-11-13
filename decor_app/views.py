@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from decor_app.models import Inventory
-
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 OWNER_USER = "piyush"
 OWNER_PASS = "piyush123"
 
@@ -95,3 +96,15 @@ def inventory_view(request):
 def booking_page(request, pk):
     item = get_object_or_404(Inventory, pk=pk)
     return render(request, 'booking_page.html', {'item': item})
+
+def reset_admin_password(request):
+    try:
+        user = User.objects.get(username='piyush')
+        user.set_password('Piyush@98765')
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+        return HttpResponse("Arey Piyush bhai! Admin password successfully reset to: Piyush@98765")
+    except User.DoesNotExist:
+        User.objects.create_superuser('piyush', 'admin@example.com', 'Piyush@98765')
+        return HttpResponse("Superuser 'piyush' created successfully with password: Piyush@98765")
