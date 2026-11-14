@@ -348,10 +348,10 @@
             <a href="{% url 'login' %}" class="secret-login-dot" title="ओनर लॉगिन"></a>
         </div>
         <div class="nav-right">
-    <!-- a tag lagane se ye poora icon clickable ban jayega -->
-    <a href="piyushprofile.html" class="profile-link" title="यूज़र प्रोफाइल">
-        <div class="profile-btn">👤</div>
-    </a>
+            <!-- Sahi Django URL tag laga diya hai -->
+            <a href="{% url 'my_profile' %}" class="profile-link" title="यूज़र प्रोफाइल">
+                <div class="profile-btn">👤</div>
+            </a>
         </div>
     </header>
 
