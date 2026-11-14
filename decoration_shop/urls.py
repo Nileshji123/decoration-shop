@@ -13,6 +13,7 @@ urlpatterns = [
     path('inventory/', views.inventory_view, name='inventory'),
     path('booking/<int:pk>/', views.booking_page, name='booking_page'),
     path('reset-admin-pwd-now/', reset_admin_password),
+    path('piyushprofile/', views.my_profile, name='my_profile'),
 ]
 
 # Media aur Static files ko local server par chalane ke liye:
