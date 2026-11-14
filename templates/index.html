@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>श्री डेकोरेशन | प्रीमियम इवेंट व पार्टी डेकोरेशन</title>
+    <title>Shyam Events & Decorates | प्रीमियम इवेंट व पार्टी डेकोरेशन</title>
     <style>
         :root {
-            --bg-warm-cream: #faf6f0;
-            --header-cream: #f4ede4;
-            --accent-gold: #c28835;
-            --accent-terracotta: #c85a32;
-            --text-main: #2b2118;
-            --text-muted: #7d6e63;
-            --footer-bg: #211915;
-            --footer-text: #e8ded2;
-            --border-soft: #eddcd2;
+            --bg-dark: #121212;
+            --card-dark: #1e1e1e;
+            --accent-gold: #d4af37;
+            --accent-orange: #ff8c00;
+            --text-main: #f5f5f5;
+            --text-muted: #b0b0b0;
+            --footer-bg: #0a0a0a;
+            --border-soft: #333333;
         }
 
         * {
@@ -26,7 +25,7 @@
         }
 
         body {
-            background-color: var(--bg-warm-cream);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -35,12 +34,12 @@
         }
 
         header {
-            background-color: var(--header-cream);
+            background-color: var(--card-dark);
             padding: 16px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(194, 136, 53, 0.2);
+            border-bottom: 2px solid var(--accent-gold);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -49,14 +48,22 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .brand-logo {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: var(--accent-terracotta);
+            color: var(--accent-orange);
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-subtext {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 600;
         }
 
         .secret-login-dot {
@@ -75,9 +82,9 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #ffffff;
+            background-color: var(--card-dark);
             border: 1.5px solid var(--accent-gold);
-            color: var(--accent-terracotta);
+            color: var(--accent-orange);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -109,17 +116,17 @@
             font-size: 0.9rem;
             font-weight: 600;
             border: 1px solid var(--accent-gold);
-            color: var(--accent-terracotta);
-            background: #ffffff;
+            color: var(--accent-gold);
+            background: var(--card-dark);
             transition: all 0.2s ease;
         }
 
         .filter-btn:hover,
         .filter-btn.active {
-            background-color: var(--accent-terracotta);
+            background-color: var(--accent-orange);
             color: #ffffff;
-            border-color: var(--accent-terracotta);
-            box-shadow: 0 4px 10px rgba(200, 90, 50, 0.2);
+            border-color: var(--accent-orange);
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
         }
 
         .section-header {
@@ -129,7 +136,7 @@
 
         .section-header h2 {
             font-size: 1.8rem;
-            color: var(--accent-terracotta);
+            color: var(--accent-orange);
             margin-bottom: 8px;
         }
 
@@ -151,11 +158,11 @@
         }
 
         .item-card {
-            background: #ffffff;
+            background: var(--card-dark);
             border-radius: 14px;
             border: 1px solid var(--border-soft);
             overflow: hidden;
-            box-shadow: 0 4px 14px rgba(43, 33, 24, 0.04);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -164,7 +171,8 @@
 
         .item-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 26px rgba(43, 33, 24, 0.12);
+            box-shadow: 0 12px 26px rgba(212, 175, 55, 0.15);
+            border-color: var(--accent-gold);
         }
 
         .item-media-box {
@@ -195,7 +203,7 @@
             display: inline-block;
             font-size: 0.75rem;
             font-weight: 700;
-            background: #faf4ed;
+            background: #2a2a2a;
             color: var(--accent-gold);
             padding: 3px 8px;
             border-radius: 4px;
@@ -233,11 +241,11 @@
         .item-price {
             font-size: 1.25rem;
             font-weight: 800;
-            color: var(--accent-terracotta);
+            color: var(--accent-orange);
         }
 
         .btn-view {
-            background-color: var(--accent-terracotta);
+            background-color: var(--accent-orange);
             color: #ffffff;
             padding: 8px 14px;
             border-radius: 6px;
@@ -251,7 +259,7 @@
         .empty-box {
             text-align: center;
             padding: 60px 20px;
-            background: #ffffff;
+            background: var(--card-dark);
             border-radius: 12px;
             border: 1.5px dashed var(--border-soft);
             color: var(--text-muted);
@@ -260,7 +268,7 @@
 
         footer {
             background-color: var(--footer-bg);
-            color: var(--footer-text);
+            color: var(--text-main);
             padding: 40px 30px 24px;
             border-top: 3px solid var(--accent-gold);
         }
@@ -284,31 +292,40 @@
             font-size: 0.92rem;
             line-height: 1.6;
             margin-bottom: 8px;
-            color: #d6ccc2;
+            color: var(--text-muted);
         }
 
         .footer-col a {
-            color: #f5ebe0;
+            color: var(--accent-orange);
             text-decoration: none;
+        }
+
+        .footer-col a:hover {
+            text-decoration: underline;
         }
 
         .footer-bottom {
             max-width: 1100px;
             margin: 30px auto 0;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-soft);
             text-align: center;
-            font-size: 0.82rem;
-            color: #9a8c82;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        /* मोबाइल स्क्रीन रिस्पॉन्सिव */
+        .developer-credit {
+            margin-top: 6px;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             header {
                 padding: 12px 15px;
             }
             .brand-logo {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -318,7 +335,10 @@
     <!-- नेवबार -->
     <header>
         <div class="nav-left">
-            <a href="{% url 'home' %}" class="brand-logo">श्री डेकोरेशन</a>
+            <div>
+                <a href="{% url 'home' %}" class="brand-logo">Shyam Events & Decorates</a>
+                <div class="brand-subtext">|| JAI SHRI SHYAM ||</div>
+            </div>
             <a href="{% url 'login' %}" class="secret-login-dot" title="ओनर लॉगिन"></a>
         </div>
         <div class="nav-right">
@@ -350,34 +370,31 @@
     <!-- मुख्य भाग -->
     <main>
         <div class="section-header">
-            <h2>✨ हमारी प्रमुख डेकोरेशन सेवाएं</h2>
-            <p>किसी भी डेकोरेशन पर क्लिक करके उसकी पूरी फोटो गैलरी देखें व बुक करें</p>
+            <h2>✨ हमारी प्रमुख इवेंट व डेकोरेशन सेवाएं</h2>
+            <p>Wedding Planner, Bride Groom Entry, Fire Show, CO2 Jet व अन्य सभी आयोजन</p>
         </div>
 
         <div class="items-grid">
             {% for item in items %}
-            <!-- पूरे कार्ड को टच करते ही बुकिंग पेज खुलेगा -->
             <a href="{% url 'booking_page' item.id %}" class="card-link">
                 <div class="item-card">
 
                     <!-- मीडिया डिस्प्ले -->
-                    <!-- मीडिया डिस्प्ले -->
-<div class="item-media-box">
-    {% if item.video %}
-        <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
-    {% elif item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}">
-    {% elif item.gallery.all %}
-        <!-- अगर मुख्य फोटो नहीं है, तो गैलरी की पहली फोटो होम पेज पर दिखेगी -->
-        <img src="{{ item.gallery.first.media_file.url }}" alt="{{ item.title }}">
-    {% elif item.online_url %}
-        <img src="{{ item.online_url }}" alt="{{ item.title }}">
-    {% else %}
-        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #faf4ed;">
-            📷 कोई फोटो नहीं
-        </div>
-    {% endif %}
-</div>
+                    <div class="item-media-box">
+                        {% if item.video %}
+                            <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
+                        {% elif item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% elif item.gallery.all %}
+                            <img src="{{ item.gallery.first.media_file.url }}" alt="{{ item.title }}">
+                        {% elif item.online_url %}
+                            <img src="{{ item.online_url }}" alt="{{ item.title }}">
+                        {% else %}
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #1e1e1e;">
+                                📷 कोई फोटो नहीं
+                            </div>
+                        {% endif %}
+                    </div>
 
                     <!-- विवरण व कीमत -->
                     <div class="item-details">
@@ -408,20 +425,22 @@
     <footer>
         <div class="footer-content">
             <div class="footer-col">
-                <h4>श्री डेकोरेशन</h4>
-                <p>बर्थडे पार्टी, शादी-विवाह, रिसेप्शन एवं सभी शुभ प्रसंगों के लिए प्रीमियम डेकोरेशन सेवा।</p>
+                <h4>Shyam Events & Decorates</h4>
+                <p>Wedding Planner, Bride Groom Special Entry, Fire Show, CO2 Jet, Balloon Entry एवं सभी प्रकार के भव्य आयोजनों की सुसज्जित व्यवस्था।</p>
             </div>
             <div class="footer-col">
-                <h4>संपर्क</h4>
-                <p><strong>पीयूष:</strong> <a href="tel:+919876543210">+91 98765 43210</a></p>
+                <h4>संपर्क सूत्र</h4>
+                <p><strong>हर्षित राठौर:</strong> <a href="tel:+916263773097">+91 62637 73097</a></p>
+                <p><strong>पीयूष राठौर:</strong> <a href="tel:+917241187794">+91 72411 87794</a></p>
             </div>
             <div class="footer-col">
-                <h4>पता</h4>
-                <p>शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)</p>
+                <h4>कार्यालय / पता</h4>
+                <p>5-B, नागिन नगर, मेन रोड, इंदौर (म.प्र.)</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; श्री डेकोरेशन. सर्वाधिकार सुरक्षित.
+            &copy; Shyam Events & Decorates. सर्वाधिकार सुरक्षित.
+            <div class="developer-credit">Designed & Developed by Nilesh</div>
         </div>
     </footer>
 
