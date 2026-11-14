@@ -96,8 +96,7 @@ def inventory_view(request):
 def booking_page(request, pk):
     item = get_object_or_404(Inventory, pk=pk)
     return render(request, 'booking_page.html', {'item': item})
-def my_profile(request):
-    return render(request,'piyushprofile.html')
+
 
 def reset_admin_password(request):
     try:
