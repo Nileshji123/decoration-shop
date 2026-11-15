@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ item.title }} | श्री डेकोरेशन बुकिंग</title>
+    <title>{{ item.title }} | Shyam Events & Decorates</title>
     <style>
         :root {
             --bg-warm-cream: #faf6f0;
@@ -223,8 +223,8 @@
 
     <!-- हेडर -->
     <header>
-        <a href="{% url 'home' %}" class="back-link">← वापस होम पेज</a>
-        <div class="brand-name">श्री डेकोरेशन</div>
+        <a href="{% url 'home' %}" class="back-link">← Home</a>
+        <div class="brand-name">Shyam Events & Decorates</div>
     </header>
 
     <div class="container">
@@ -274,19 +274,19 @@
             <span class="cat-tag">{{ item.get_category_display }}</span>
             <h1 class="item-heading">{{ item.title }}</h1>
             <div class="price-tag">₹{{ item.price }}</div>
-            <p class="description-text">{{ item.description|default:"शानदार और आकर्षक सेटअप।" }}</p>
+            <p class="description-text">{{ item.description|default:"Decoration Booking" }}</p>
 
             <!-- 3. संपर्क व पता -->
             <div class="contact-box">
-                <h3>📍 दुकान व बुकिंग जानकारी</h3>
-                <p><strong>दुकान का नाम:</strong> श्री डेकोरेशन</p>
-                <p><strong>पता:</strong> शॉप नं. 12, मेन मार्केट, चंदन नगर, इंदौर (म.प्र.)[cite: 1]</p>
-                <p><strong>कॉल / संपर्क:</strong> +91 98765 43210</p>
-                <p><strong>समय:</strong> सुबह 9:00 AM से रात 9:30 PM</p>
+                <h3>📍 Shop & Booking Information</h3>
+                    <p><strong>Shop Name:</strong> Shree Decoration</p>
+                    <p><strong>Address:</strong> Shop No. 12, Main Market, Chandan Nagar, Indore (M.P.)</p>
+                    <p><strong>Call / Contact:</strong> +91 98765 43210</p>
+                    <p><strong>Timing:</strong> 9:00 AM to 9:30 PM</p>
             </div>
 
             <!-- 4. व्हाट्सएप बुकिंग -->
-            <a href="https://wa.me/919876543210?text=नमस्ते%20श्री%20डेकोरेशन,%20मुझे%20'{{ item.title }}'%20(प्राइस:%20₹{{ item.price }})%20डेकोरेशन%20बुक%20करनी%20है।" 
+            <a href="https://wa.me/916263773097?text=Hello%20Shri%20Decoration,%20I%20want%20to%20book%20the%20decoration%20'{{ item.title }}'%20(Price:%20₹{{ item.price }})." 
                target="_blank" 
                class="btn-whatsapp-book">
                 💬 व्हाट्सएप पर सीधे बुक करें

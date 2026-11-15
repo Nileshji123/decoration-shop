@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shyam Events & Decorates | प्रीमियम इवेंट व पार्टी डेकोरेशन</title>
+    <title>Shyam Events & Decorates | Premium Event & Party Decoration</title>
     <link rel="icon" type="image/png" href="{% static 'images/piyush_logo.png' %}">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
     <style>
@@ -359,19 +359,19 @@
     <div style="margin-top: 25px;">
         <div class="category-filter-bar">
             <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">
-                🌟 सभी डेकोरेशन
+                🌟all decoration
             </a>
             <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">
-                🎂 बर्थडे पार्टी
+                🎂 happy Barth day
             </a>
             <a href="{% url 'home' %}?cat=wedding" class="filter-btn {% if current_category == 'wedding' %}active{% endif %}">
-                💍 वेडिंग व स्टेज
+                💍 wedding
             </a>
             <a href="{% url 'home' %}?cat=anniversary" class="filter-btn {% if current_category == 'anniversary' %}active{% endif %}">
-                🥂 एनिवर्सरी
+                🥂 party
             </a>
             <a href="{% url 'home' %}?cat=baby_shower" class="filter-btn {% if current_category == 'baby_shower' %}active{% endif %}">
-                🍼 बेबी शॉवर
+                🍼 baby shwer
             </a>
         </div>
     </div>
@@ -379,8 +379,8 @@
     <!-- मुख्य भाग -->
     <main>
         <div class="section-header">
-            <h2>✨ हमारी प्रमुख इवेंट व डेकोरेशन सेवाएं</h2>
-            <p>Wedding Planner, Bride Groom Entry, Fire Show, CO2 Jet व अन्य सभी आयोजन</p>
+            <h2>✨Our Premier Event & Decoration Services</h2>
+            <p>Wedding Planner, Bride Groom Entry, Fire Show, CO2 Jet & many more</p>
         </div>
 
         <div class="items-grid">
@@ -400,7 +400,7 @@
                             <img src="{{ item.online_url }}" alt="{{ item.title }}">
                         {% else %}
                             <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #1e1e1e;">
-                                📷 कोई फोटो नहीं
+                               @ 📷 कोई फोटो नहीं
                             </div>
                         {% endif %}
                     </div>
@@ -415,7 +415,7 @@
 
                         <div class="item-footer">
                             <div class="item-price">₹{{ item.price }}</div>
-                            <span class="btn-view">विवरण देखें &rarr;</span>
+                            <span class="btn-view"> Description &rarr;</span>
                         </div>
                     </div>
 
@@ -423,8 +423,8 @@
             </a>
             {% empty %}
             <div class="empty-box">
-                <h3>अभी कोई डेकोरेशन लिस्ट नहीं है</h3>
-                <p>इन्वेंटरी सेक्शन से जो भी डेकोरेशन जुड़ेगी, वह यहाँ दिखने लगेगी।</p>
+                <h3>No Decoration List Available Yet</h3>
+                <p>Any decorations added from the inventory section will appear here.</p>
             </div>
             {% endfor %}
         </div>
@@ -435,7 +435,7 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Shyam Events & Decorates</h4>
-                <p>Wedding Planner, Bride Groom Special Entry, Fire Show, CO2 Jet, Balloon Entry एवं सभी प्रकार के भव्य आयोजनों की सुसज्जित व्यवस्था।</p>
+                <p>Wedding Planner, Bride Groom Special Entry, Fire Show, CO2 Jet, Balloon Entry etc।</p>
             </div>
             <div class="footer-col">
                 <h4>contect number</h4>
