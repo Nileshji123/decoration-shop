@@ -1,20 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from decor_app.models import Inventory
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from decor_app.models import Inventory, DecorationMedia
+
 OWNER_USER = "piyush"
 OWNER_PASS = "piyush123"
 
 # 1. मुख्य होमपेज (जहाँ पब्लिक को सारी एक्टिव इन्वेंटरी दिखेगी)
 def home(request):
-    # URL से चुनी हुई कैटेगरी निकालें (उदा: ?cat=birthday)
     category_slug = request.GET.get('cat')
 
     if category_slug and category_slug != 'all':
-        # सिर्फ चुनी हुई कैटेगरी के आइटम्स निकालें
         items = Inventory.objects.filter(category=category_slug).order_by('-created_at')
     else:
-        # अगर 'सभी' चुना है या कोई फ़िल्टर नहीं है तो सब दिखाएँ
         items = Inventory.objects.all().order_by('-created_at')
 
     context = {
@@ -42,12 +40,6 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 # 4. इन्वेंटरी पेज (अपलोड फॉर्म + डेटाबेस लिस्टिंग)
-from django.shortcuts import render, redirect
-from .models import Inventory, DecorationMedia
-
-from django.shortcuts import render, redirect
-from .models import Inventory, DecorationMedia
-
 def inventory_view(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -60,14 +52,12 @@ def inventory_view(request):
         
         gallery_files = request.FILES.getlist('gallery_images')
         
-        # Agar main image nahi di hai, toh gallery ki pehli image ko hi main image bana lo
         if not image and gallery_files:
             for f in gallery_files:
                 if not f.name.lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm')):
                     image = f
                     break
 
-        # 1. Inventory item save karein
         item = Inventory.objects.create(
             title=title,
             price=price,
@@ -78,7 +68,6 @@ def inventory_view(request):
             description=description
         )
         
-        # 2. Saari files/videos gallery me save karein
         for f in gallery_files:
             is_vid = f.name.lower().endswith(('.mp4', '.avi', '.mov', '.mkv', '.webm'))
             DecorationMedia.objects.create(
@@ -97,9 +86,6 @@ def booking_page(request, pk):
     item = get_object_or_404(Inventory, pk=pk)
     return render(request, 'booking_page.html', {'item': item})
 
-def my_profile(request):
-    return render(request,'piyushprofile.html')
-
 def reset_admin_password(request):
     try:
         user = User.objects.get(username='piyush')
@@ -111,3 +97,6 @@ def reset_admin_password(request):
     except User.DoesNotExist:
         User.objects.create_superuser('piyush', 'admin@example.com', 'Piyush@98765')
         return HttpResponse("Superuser 'piyush' created successfully with password: Piyush@98765")
+
+def my_profile(request):
+    return render(request, 'piyushprofile.html')
