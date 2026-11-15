@@ -188,6 +188,44 @@
             color: #10b981;
             font-weight: bold;
         }
+
+        /* Action Buttons Styling matching your CSS */
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-delete {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-edit {
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-edit:hover {
+            background-color: var(--accent-hover);
+        }
     </style>
 </head>
 <body>
@@ -216,6 +254,7 @@
                 <div class="panel-heading">नया डेकोरेशन आइटम जोड़ें</div>
                 <form method="POST" action="{% url 'inventory' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="hidden" name="action" value="add">
                     <div class="form-grid">
                         <div>
                             <label>डेकोरेशन का नाम / टाइटल *</label>
@@ -228,10 +267,10 @@
                         <div>
                             <label>इवेंट प्रकार (Category)</label>
                             <select name="category">
-                                <option value="birthday">बर्थडे पार्टी (Birthday)</option>
-                                <option value="wedding">वेडिंग व स्टेज (Wedding)</option>
-                                <option value="anniversary">एनिवर्सरी (Anniversary)</option>
-                                <option value="baby_shower">बेबी शॉवर / नामकरण</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="baby_shower">Baby Shower</option>
                             </select>
                         </div>
                         <div>
@@ -271,6 +310,7 @@
                                 <th>कैटेगरी</th>
                                 <th>प्राइस</th>
                                 <th>विवरण</th>
+                                <th>एक्शन</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -280,7 +320,6 @@
                                     {% if item.image %}
                                         <img src="{{ item.image.url }}" class="item-thumb" alt="Decor">
                                     {% elif item.gallery.all %}
-                                        <!-- अगर मुख्य फोटो नहीं है, तो गैलरी की पहली फोटो थंबनेल में दिखेगी -->
                                         <img src="{{ item.gallery.first.media_file.url }}" class="item-thumb" alt="Decor">
                                     {% elif item.online_url %}
                                         <img src="{{ item.online_url }}" class="item-thumb" alt="Decor">
@@ -292,10 +331,24 @@
                                 <td>{{ item.get_category_display }}</td>
                                 <td class="price-badge">₹{{ item.price }}</td>
                                 <td>{{ item.description|default:"—" }}</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <!-- Edit Button -->
+                                        <a href="{% url 'update_inventory' item.id %}" class="btn-edit">Edit</a>
+                                        
+                                        <!-- Delete Form & Button -->
+                                        <form method="POST" action="{% url 'inventory' %}" style="display:inline; margin:0;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                                            <button type="submit" class="btn-delete" onclick="return confirm('क्या आप सचमुच इस आइटम को डिलीट करना चाहते हैं?')">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 25px;">
+                                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 25px;">
                                     डेटाबेस में अभी कोई सामान नहीं है। ऊपर दिए गए फॉर्म से पहला आइटम जोड़ें!
                                 </td>
                             </tr>
