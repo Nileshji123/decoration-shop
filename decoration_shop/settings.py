@@ -15,10 +15,12 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-ujmw8g5-#jp&ps3iumix_(0(^q+xx9o0uxv957f#b2by5mk=^$'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-ujmw8g5-#jp&ps3iumix_(0(^q+xx9o0uxv957f#b2by5mk=^$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Render पर इसे False रखना ही सही है
 DEBUG = False
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -36,13 +38,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise यहाँ ऊपर रहना जरूरी है
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'decoration_shop.urls'
@@ -65,7 +67,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'decoration_shop.wsgi.application'
 
 # Database
-# Local SQLite fallback for development, or Render URL if available
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
@@ -95,24 +96,29 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images) - Render / WhiteNoise के लिए सुरक्षित कॉन्फ़िगरेशन
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# 500 एरर से बचने के लिए यहाँ Manifest की जगह सिंपल StaticFilesStorage का उपयोग किया है
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+
+# Media files (Cloudinary)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Storage backends for Cloudinary
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
-
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Cloudinary कॉन्फ़िगरेशन
 CLOUDINARY_STORAGE = {
@@ -126,5 +132,3 @@ cloudinary.config(
     api_key="928498621819437",
     api_secret="ukeuiDEZLG_bsO-XWrGjSLK4Pqk"
 )
-
-# Storage backends
