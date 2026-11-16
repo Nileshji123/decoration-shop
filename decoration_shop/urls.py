@@ -11,6 +11,7 @@ urlpatterns = [
     path('piyush-entry/', views.login, name='login'),
     path('piyush-dashbored/', views.dashboard, name='dashboard'),
     path('inventory/', views.inventory_view, name='inventory'),
+    path('update-inventory/<int:pk>/', views.inventory_view, name='update_inventory'),
     path('booking/<int:pk>/', views.booking_page, name='booking_page'),
     path('reset-admin-pwd-now/', reset_admin_password),
     path('piyushprofile/', views.my_profile, name='my_profile'),
