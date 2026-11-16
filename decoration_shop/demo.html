@@ -227,36 +227,34 @@
             background-color: var(--accent-hover);
         }
     </style>
-</head>
-<body>
+    <html>
+        <head>
+            <body>
+                <aside>
+                    <div>
+                        <div class="side-brand">श्री डेकोरेशन</div>
+                        <ul class="side-nav">
+                            <li><a href="{% url 'dashboard' %}">🏠 डैशबोर्ड होम</a></li>
+                            <li><a href="{% url 'inventory' %}" class="active">📦 इन्वेंटरी</a></li>
+                            <li><a href="{% url 'home' %}" target="_blank">🌐 लाइव वेबसाइट</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <div class="main-wrapper">
+                    <header>
+                        <div class="header-title">📦 इन्वेंटरी कंट्रोल पैनल</div>
+                        <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
+                    </header>
 
-    <aside>
-        <div>
-            <div class="side-brand">श्री डेकोरेशन</div>
-            <ul class="side-nav">
-                <li><a href="{% url 'dashboard' %}">🏠 डैशबोर्ड होम</a></li>
-                <li><a href="{% url 'inventory' %}" class="active">📦 इन्वेंटरी</a></li>
-                <li><a href="{% url 'home' %}" target="_blank">🌐 लाइव वेबसाइट</a></li>
-            </ul>
-        </div>
-    </aside>
-
-    <div class="main-wrapper">
-        <header>
-            <div class="header-title">📦 इन्वेंटरी कंट्रोल पैनल</div>
-            <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
-        </header>
-
-        <main class="content-area">
-            
-            <!-- फॉर्म: डेटाबेस में नए आइटम और मल्टीपल मीडिया जोड़ने के लिए -->
-            <div class="panel-box">
-                <div class="panel-heading">नया डेकोरेशन आइटम जोड़ें</div>
-                <form method="POST" action="{% url 'inventory' %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="add">
-                    <div class="form-grid">
-                        <div>
+                    <main class="content-area">
+                        <!-- फॉर्म: डेटाबेस में नए आइटम और मल्टीपल मीडिया जोड़ने के लिए -->
+                        <div class="panel-box">
+                            <div class="panel-heading">नया डेकोरेशन आइटम जोड़ें</div>
+                                <form method="POST" action="{% url 'inventory' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="add">
+                                    <div class="form-grid">
+                            <div>
                             <label>डेकोरेशन का नाम / टाइटल *</label>
                             <input type="text" name="title" placeholder="उदा. रॉयल बर्थडे रिंग" required>
                         </div>
@@ -362,4 +360,5 @@
     </div>
 
 </body>
+</head>
 </html>

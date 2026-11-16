@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>इन्वेंटरी कंट्रोल पैनल - श्री डेकोरेशन</title>
+    <style>
+        /* बेसिक स्टाइल्स ताकि पैनल साफ़-सुथरा दिखे */
+        :root {
+            --bg-main: #f4f6f9;
+            --sidebar-bg: #1e293b;
+            --text-color: #334155;
+            --primary-color: #4f46e5;
+            --danger-color: #ef4444;
+            --white: #ffffff;
+            --border-color: #cbd5e1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            display: flex;
+        }
+        aside {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--white);
+            height: 100vh;
+            position: fixed;
+            padding: 20px;
+        }
+        .side-brand {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #38bdf8;
+        }
+        .side-nav {
+            list-style: none;
+            padding: 0;
+        }
+        .side-nav li {
+            margin-bottom: 15px;
+        }
+        .side-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+        .side-nav a:hover, .side-nav a.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        .main-wrapper {
+            margin-left: 280px;
+            flex: 1;
+            padding: 30px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .btn-back {
+            background: #64748b;
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+        .panel-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .panel-heading {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .col-full {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input[type="text"], input[type="number"], input[type="url"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        .file-box {
+            padding: 5px 0;
+        }
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f8fafc;
+        }
+        .item-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .price-badge {
+            font-weight: bold;
+            color: #16a34a;
+        }
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-edit {
+            background: #eab308;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .btn-delete {
+            background: var(--danger-color);
+            color: var(--white);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <div>
+            <div class="side-brand">श्री डेकोरेशन</div>
+            <ul class="side-nav">
+                <li><a href="{% url 'dashboard' %}">🏠 डैशबोर्ड होम</a></li>
+                <li><a href="{% url 'inventory' %}" class="active">📦 इन्वेंटरी</a></li>
+                <li><a href="{% url 'home' %}" target="_blank">🌐 लाइव वेबसाइट</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header>
+            <div class="header-title">📦 इन्वेंटरी कंट्रोल पैनल</div>
+            <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
+        </header>
+
+        <main class="content-area">
+            
+            <!-- फॉर्म: डेटाबेस में नए आइटम और मल्टीपल मीडिया जोड़ने के लिए -->
+            <div class="panel-box">
+                <div class="panel-heading">नया डेकोरेशन आइटम जोड़ें</div>
+                <form method="POST" action="{% url 'inventory' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add">
+                    <div class="form-grid">
+                        <div>
+                            <label>डेकोरेशन का नाम / टाइटल *</label>
+                            <input type="text" name="title" placeholder="उदा. रॉयल बर्थडे रिंग" required>
+                        </div>
+                        <div>
+                            <label>स्टार्टिंग प्राइस (₹) *</label>
+                            <input type="number" name="price" placeholder="उदा. 2500" required>
+                        </div>
+                        <div>
+                            <label>इवेंट प्रकार (Category)</label>
+                            <select name="category">
+                                <option value="birthday">Birthday</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="baby_shower">Baby Shower</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>📷 मुख्य फोटो</label>
+                            <div class="file-box"><input type="file" name="image" accept="image/*"></div>
+                        </div>
+                        <div>
+                            <label>🎥 मुख्य वीडियो क्लिप</label>
+                            <div class="file-box"><input type="file" name="video" accept="video/*"></div>
+                        </div>
+                        <div>
+                            <label>🌐 ऑनलाइन इमेज लिंक (URL)</label>
+                            <input type="url" name="online_url" placeholder="https://...">
+                        </div>
+                        <div class="col-full">
+                            <label>🖼️ गैलरी के लिए मल्टीपल फ़ोटो / वीडियो (Multiple Files)</label>
+                            <div class="file-box"><input type="file" name="gallery_images" accept="image/*,video/*" multiple></div>
+                        </div>
+                        <div class="col-full">
+                            <label>विवरण (Description)</label>
+                            <textarea name="description" rows="2" placeholder="लाइट्स, बैलून और बैकग्राउंड डिटेल्स"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">+ डेटाबेस में सेव करें</button>
+                </form>
+            </div>
+
+            <!-- डेटाबेस से आई मौजूदा इन्वेंटरी लिस्ट -->
+            <div class="panel-box">
+                <div class="panel-heading">मौजूदा इन्वेंटरी लिस्ट (डेटाबेस रिकॉर्ड्स)</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>मीडिया</th>
+                                <th>टाइटल</th>
+                                <th>कैटेगरी</th>
+                                <th>प्राइस</th>
+                                <th>विवरण</th>
+                                <th>एक्शन</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                                <td>
+                                    {% if item.image %}
+                                        <img src="{{ item.image.url }}" class="item-thumb" alt="Decor">
+                                    {% elif item.gallery.all %}
+                                        <img src="{{ item.gallery.first.media_file.url }}" class="item-thumb" alt="Decor">
+                                    {% elif item.online_url %}
+                                        <img src="{{ item.online_url }}" class="item-thumb" alt="Decor">
+                                    {% else %}
+                                        <span>📷 कोई फोटो नहीं</span>
+                                    {% endif %}
+                                </td>
+                                <td><strong>{{ item.title }}</strong></td>
+                                <td>{{ item.get_category_display }}</td>
+                                <td class="price-badge">₹{{ item.price }}</td>
+                                <td>{{ item.description|default:"—" }}</td>
+                                <td>
+                                    <div class="action-btns">
+                                        <!-- Edit Button -->
+                                        <a href="{% url 'update_inventory' item.id %}" class="btn-edit">Edit</a>
+                                        
+                                        <!-- Delete Form & Button -->
+                                        <form method="POST" action="{% url 'inventory' %}" style="display:inline; margin:0;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                                            <button type="submit" class="btn-delete" onclick="return confirm('क्या आप सचमुच इस आइटम को डिलीट करना चाहते हैं?')">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #64748b; padding: 25px;">
+                                    डेटाबेस में अभी कोई सामान नहीं है। ऊपर दिए गए फॉर्म से पहला आइटम जोड़ें!
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
