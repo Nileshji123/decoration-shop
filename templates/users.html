@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>यूजर डेटा - श्री डेकोरेशन</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin: 0; padding: 30px; color: #334155; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: #4f46e5; margin-bottom: 20px; }
+        .btn-back { display: inline-block; margin-bottom: 20px; background: #64748b; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; }
+        .info-box { background: #f8fafc; padding: 20px; border-radius: 6px; border-left: 4px solid #16a34a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
+        <h2>👥 यूजर और ग्राहक डेटा (Contacts)</h2>
+        <div class="info-box">
+            <p>यहाँ इंक्वायरी करने वाले ग्राहकों के नाम और फोन नंबर्स शो होंगे ताकि आप उनसे सीधा संपर्क कर सकें।</p>
+        </div>
+    </div>
+</body>
+</html>

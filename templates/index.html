@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,26 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #121212;
-            --card-dark: #1e1e1e;
-            --accent-gold: #d4af37;
-            --accent-orange: #ff8c00;
-            --text-main: #f5f5f5;
-            --text-muted: #b0b0b0;
-            --footer-bg: #0a0a0a;
-            --border-soft: #333333;
+            --bg-base: #faf6f0;
+            --card-bg: #ffffff;
+            --accent-terracotta: #c85a32;
+            --accent-gold: #c28835;
+            --accent-green: #16a34a;
+            --text-dark: #2b2118;
+            --text-muted: #7d6e63;
+            --footer-bg: #211915;
+            --border-soft: #eddcd2;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg-base);
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,7 +37,7 @@
         }
 
         header {
-            background-color: var(--card-dark);
+            background-color: var(--card-bg);
             padding: 16px 30px;
             display: flex;
             align-items: center;
@@ -45,6 +46,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(43, 33, 24, 0.05);
         }
 
         .nav-left {
@@ -58,10 +60,8 @@
             font-size: 1.7rem;
             font-weight: 700;
             font-style: italic;
-            color: var(--accent-orange);
+            color: var(--accent-terracotta);
             text-decoration: none;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .brand-subtext {
@@ -70,6 +70,12 @@
             color: var(--accent-gold);
             font-weight: 600;
             letter-spacing: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .secret-login-dot {
@@ -81,21 +87,26 @@
             cursor: pointer;
             text-decoration: none;
             opacity: 0.65;
-            transition: all 0.25s ease;
         }
 
         .profile-btn {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: var(--card-dark);
+            background-color: #fdfbf7;
             border: 1.5px solid var(--accent-gold);
-            color: var(--accent-orange);
+            color: var(--accent-terracotta);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.15rem;
             text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .profile-btn:hover {
+            background-color: var(--accent-terracotta);
+            color: #fff;
         }
 
         main {
@@ -110,29 +121,28 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 30px;
+            gap: 10px;
+            margin-bottom: 35px;
             padding: 0 15px;
         }
 
         .filter-btn {
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            background: var(--card-dark);
+            border: 1px solid var(--border-soft);
+            color: var(--text-dark);
+            background: var(--card-bg);
             transition: all 0.2s ease;
         }
 
         .filter-btn:hover,
         .filter-btn.active {
-            background-color: var(--accent-orange);
+            background-color: var(--accent-terracotta);
             color: #ffffff;
-            border-color: var(--accent-orange);
-            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+            border-color: var(--accent-terracotta);
         }
 
         .section-header {
@@ -142,8 +152,9 @@
 
         .section-header h2 {
             font-size: 1.8rem;
-            color: var(--accent-orange);
+            color: var(--accent-terracotta);
             margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
         }
 
         .section-header p {
@@ -153,22 +164,16 @@
 
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 26px;
         }
 
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
         .item-card {
-            background: var(--card-dark);
+            background: var(--card-bg);
             border-radius: 14px;
             border: 1px solid var(--border-soft);
             overflow: hidden;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 14px rgba(43, 33, 24, 0.04);
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -177,16 +182,18 @@
 
         .item-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 26px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 12px 26px rgba(43, 33, 24, 0.08);
             border-color: var(--accent-gold);
         }
 
         .item-media-box {
-            height: 200px;
+            height: 190px;
             width: 100%;
             background-color: #000000;
             position: relative;
             overflow: hidden;
+            display: block;
+            text-decoration: none;
         }
 
         .item-media-box img,
@@ -207,32 +214,31 @@
 
         .category-tag {
             display: inline-block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            background: #2a2a2a;
+            background: #fdfbf7;
             color: var(--accent-gold);
             padding: 3px 8px;
             border-radius: 4px;
             border: 1px solid var(--border-soft);
             margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .item-title {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
         }
 
-        .item-desc {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 14px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .item-title-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .item-title-link:hover .item-title {
+            color: var(--accent-terracotta);
         }
 
         .item-footer {
@@ -241,41 +247,125 @@
             justify-content: space-between;
             border-top: 1px solid var(--border-soft);
             padding-top: 14px;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .item-price {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 800;
-            color: var(--accent-orange);
+            color: var(--accent-terracotta);
         }
 
-        .btn-view {
-            background-color: var(--accent-orange);
+        .btn-booking {
+            background-color: var(--accent-green);
             color: #ffffff;
-            padding: 8px 14px;
+            padding: 7px 12px;
             border-radius: 6px;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(22, 163, 74, 0.2);
         }
 
         .empty-box {
             text-align: center;
             padding: 60px 20px;
-            background: var(--card-dark);
+            background: var(--card-bg);
             border-radius: 12px;
             border: 1.5px dashed var(--border-soft);
             color: var(--text-muted);
             grid-column: 1 / -1;
         }
 
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(43, 33, 24, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .popup-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .popup-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent-terracotta);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .popup-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .popup-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-popup-login {
+            background-color: var(--accent-terracotta);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .btn-popup-skip {
+            background-color: #eee4dc;
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+        }
+
         footer {
             background-color: var(--footer-bg);
-            color: var(--text-main);
-            padding: 40px 30px 24px;
+            color: #f5ebe0;
+            padding: 45px 30px 25px;
             border-top: 3px solid var(--accent-gold);
         }
 
@@ -283,7 +373,7 @@
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
@@ -292,32 +382,30 @@
             font-size: 1.15rem;
             margin-bottom: 14px;
             font-weight: 700;
+            font-family: 'Cinzel', serif;
         }
 
         .footer-col p {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 8px;
-            color: var(--text-muted);
+            margin-bottom: 10px;
+            color: #d6ccc2;
         }
 
         .footer-col a {
-            color: var(--accent-orange);
+            color: #ffb703;
             text-decoration: none;
-        }
-
-        .footer-col a:hover {
-            text-decoration: underline;
+            font-weight: 600;
         }
 
         .footer-bottom {
             max-width: 1100px;
-            margin: 30px auto 0;
+            margin: 35px auto 0;
             padding-top: 20px;
-            border-top: 1px solid var(--border-soft);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: #b0a499;
         }
 
         .developer-credit {
@@ -325,134 +413,143 @@
             color: var(--accent-gold);
             font-weight: 600;
         }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 12px 15px;
-            }
-            .brand-logo {
-                font-size: 1.2rem;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- नेवबार -->
+    <!-- Optional Login Popup -->
+    <div class="popup-overlay" id="loginPopup">
+        <div class="popup-card">
+            <button class="popup-close" onclick="closePopup()">&times;</button>
+            <div class="popup-title">Would you like to login?</div>
+            <div class="popup-desc">Log in to save your contact information & preferences. You can also skip and proceed directly to booking!</div>
+            <div class="popup-actions">
+                <a href="{% url 'my_profile' %}" class="btn-popup-login">Login / Profile</a>
+                <button class="btn-popup-skip" onclick="closePopup()">Skip for Now</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="nav-left">
             <div>
                 <a href="{% url 'home' %}" class="brand-logo">Shyam Events & Decorates</a>
                 <div class="brand-subtext">|| JAI SHRI SHYAM ||</div>
             </div>
-            <a href="{% url 'login' %}" class="secret-login-dot" title="ओनर लॉगिन"></a>
+            <a href="{% url 'login' %}" class="secret-login-dot" title="Owner Login"></a>
         </div>
         <div class="nav-right">
-            <!-- Sahi Django URL tag laga diya hai -->
-            <a href="{% url 'my_profile' %}" class="profile-link" title="यूज़र प्रोफाइल">
+            <a href="{% url 'my_profile' %}" class="profile-link" title="User Profile & Login">
                 <div class="profile-btn">👤</div>
             </a>
         </div>
     </header>
 
-    <!-- कैटेगरी फिल्टर बार -->
     <div style="margin-top: 25px;">
         <div class="category-filter-bar">
-            <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">
-                🌟all decoration
-            </a>
-            <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">
-                🎂 happy Barth day
-            </a>
-            <a href="{% url 'home' %}?cat=wedding" class="filter-btn {% if current_category == 'wedding' %}active{% endif %}">
-                💍 wedding
-            </a>
-            <a href="{% url 'home' %}?cat=anniversary" class="filter-btn {% if current_category == 'anniversary' %}active{% endif %}">
-                🥂 party
-            </a>
-            <a href="{% url 'home' %}?cat=baby_shower" class="filter-btn {% if current_category == 'baby_shower' %}active{% endif %}">
-                🍼 baby shwer
-            </a>
+            <a href="{% url 'home' %}?cat=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">🌟 All Services</a>
+            <a href="{% url 'home' %}?cat=wedding_planner" class="filter-btn {% if current_category == 'wedding_planner' %}active{% endif %}">💍 Wedding Planner</a>
+            <a href="{% url 'home' %}?cat=birthday" class="filter-btn {% if current_category == 'birthday' %}active{% endif %}">🎂 Birthday Party</a>
+            <a href="{% url 'home' %}?cat=themes_party" class="filter-btn {% if current_category == 'themes_party' %}active{% endif %}">🎭 Themes Party</a>
+            <a href="{% url 'home' %}?cat=balloon_decoration" class="filter-btn {% if current_category == 'balloon_decoration' %}active{% endif %}">🎈 Balloon Decoration</a>
+            <a href="{% url 'home' %}?cat=haldi_mehndi" class="filter-btn {% if current_category == 'haldi_mehndi' %}active{% endif %}">🌼 Haldi & Mehndi</a>
+            <a href="{% url 'home' %}?cat=flower_decor" class="filter-btn {% if current_category == 'flower_decor' %}active{% endif %}">🌸 Flower Decoration</a>
+            <a href="{% url 'home' %}?cat=fire_show" class="filter-btn {% if current_category == 'fire_show' %}active{% endif %}">🔥 Fire Show</a>
+            <a href="{% url 'home' %}?cat=co2_jet" class="filter-btn {% if current_category == 'co2_jet' %}active{% endif %}">💨 CO2 Jet & Gun</a>
+            <a href="{% url 'home' %}?cat=bride_entry" class="filter-btn {% if current_category == 'bride_entry' %}active{% endif %}">✨ Special Entry</a>
         </div>
     </div>
 
-    <!-- मुख्य भाग -->
     <main>
         <div class="section-header">
-            <h2>✨Our Premier Event & Decoration Services</h2>
-            <p>Wedding Planner, Bride Groom Entry, Fire Show, CO2 Jet & many more</p>
+            <h2>✨ Our Premier Event & Decoration Services</h2>
+            <p>Explore our exclusive collection of professional event decoration setups</p>
         </div>
 
         <div class="items-grid">
             {% for item in items %}
-            <a href="{% url 'booking_page' item.id %}" class="card-link">
-                <div class="item-card">
+            <div class="item-card">
+                <!-- Clicking media opens the booking/detail page -->
+                <a href="{% url 'booking_page' item.id %}" class="item-media-box">
+                    {% if item.video %}
+                        <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
+                    {% elif item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                    {% elif item.gallery.all %}
+                        <img src="{{ item.gallery.first.media_file.url }}" alt="{{ item.title }}">
+                    {% elif item.online_url %}
+                        <img src="{{ item.online_url }}" alt="{{ item.title }}">
+                    {% else %}
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #1e1e1e;">
+                            No Media Available
+                        </div>
+                    {% endif %}
+                </a>
 
-                    <!-- मीडिया डिस्प्ले -->
-                    <div class="item-media-box">
-                        {% if item.video %}
-                            <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
-                        {% elif item.image %}
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                        {% elif item.gallery.all %}
-                            <img src="{{ item.gallery.first.media_file.url }}" alt="{{ item.title }}">
-                        {% elif item.online_url %}
-                            <img src="{{ item.online_url }}" alt="{{ item.title }}">
-                        {% else %}
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); background: #1e1e1e;">
-                               @ 📷 कोई फोटो नहीं
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <!-- विवरण व कीमत -->
-                    <div class="item-details">
-                        <div>
-                            <span class="category-tag">{{ item.get_category_display }}</span>
+                <div class="item-details">
+                    <div>
+                        <span class="category-tag">{{ item.get_category_display }}</span>
+                        <!-- Clicking title also opens the booking/detail page -->
+                        <a href="{% url 'booking_page' item.id %}" class="item-title-link">
                             <div class="item-title">{{ item.title }}</div>
-                            <div class="item-desc">{{ item.description|default:"शानदार और आकर्षक सेटअप।" }}</div>
-                        </div>
-
-                        <div class="item-footer">
-                            <div class="item-price">₹{{ item.price }}</div>
-                            <span class="btn-view"> Description &rarr;</span>
-                        </div>
+                        </a>
                     </div>
 
+                    <div class="item-footer">
+                        <div class="item-price">₹{{ item.price }}</div>
+                        <a href="https://wa.me/916263773097?text=Hello%20Shree%20Decoration,%20I%20want%20to%20book%20this%20service:%20{{ item.title }}%20(Price:%20₹{{ item.price }}).%20Please%20share%20payment%20details." 
+                           target="_blank" 
+                           class="btn-booking">
+                           Book Now →
+                        </a>
+                    </div>
                 </div>
-            </a>
+            </div>
             {% empty %}
             <div class="empty-box">
-                <h3>No Decoration List Available Yet</h3>
-                <p>Any decorations added from the inventory section will appear here.</p>
+                <h3>No Decoration Services Available Yet</h3>
+                <p>Any services added from the inventory section will appear here.</p>
             </div>
             {% endfor %}
         </div>
     </main>
 
-    <!-- फुटर -->
     <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Shyam Events & Decorates</h4>
-                <p>Wedding Planner, Bride Groom Special Entry, Fire Show, CO2 Jet, Balloon Entry etc।</p>
+                <p>Premium Wedding Planner, Bride Groom Special Entry, Fire Show, CO2 Jet, Balloon Decoration and complete event management services.</p>
             </div>
             <div class="footer-col">
-                <h4>contect number</h4>
-                <p><strong>harshit rathor:</strong> <a href="tel:+916263773097">+91 62637 73097</a></p>
-                <p><strong>piyush rathor:</strong> <a href="tel:+917241187794">+91 72411 87794</a></p>
+                <h4>Contact Numbers (Direct Call)</h4>
+                <p><strong>Harshit Rathor:</strong> <a href="tel:+916263773097">+91 62637 73097</a></p>
+                <p><strong>Piyush Rathor:</strong> <a href="tel:+917241187794">+91 72411 87794</a></p>
             </div>
             <div class="footer-col">
-                <h4>address</h4>
-                <p>5-B, nagin nagar, main rode, indore (M P)</p>
+                <h4>Office Address</h4>
+                <p>5-B, Nagin Nagar, Main Road, Indore (M.P.)</p>
             </div> 
         </div>
         <div class="footer-bottom">
-            &copy; Shyam Events & Decorates.
-            <div class="developer-credit">Designed & Developed by Nilesh </div>
-            <div class="developer-credit">contect: 9098153630 & gmail:sankadiyan@gmail.com</div>
+            &copy; Shyam Events & Decorates. All Rights Reserved.
+            <div class="developer-credit">Designed & Developed by Nilesh</div>
+            <div class="developer-credit">Contact: <a href="tel:+919098153630" style="color: var(--accent-gold);">90981 53630</a> | Email: <a href="mailto:sankadiyan@gmail.com" style="color: var(--accent-gold);">sankadiyan@gmail.com</a></div>
         </div>
     </footer>
 
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('loginPopupShown')) {
+                setTimeout(() => {
+                    document.getElementById('loginPopup').style.display = 'flex';
+                    sessionStorage.setItem('loginPopupShown', 'true');
+                }, 1500);
+            }
+        });
+
+        function closePopup() {
+            document.getElementById('loginPopup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

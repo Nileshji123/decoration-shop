@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>बुकिंग हिस्ट्री - श्री डेकोरेशन</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin: 0; padding: 30px; color: #334155; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: #4f46e5; margin-bottom: 20px; }
+        .btn-back { display: inline-block; margin-bottom: 20px; background: #64748b; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; }
+        .info-box { background: #f8fafc; padding: 20px; border-radius: 6px; border-left: 4px solid #4f46e5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
+        <h2>📜 बुकिंग हिस्ट्री और रिकॉर्ड्स</h2>
+        <div class="info-box">
+            <p>यहाँ आपकी पिछली बुकिंग्स और इंक्वायरी का रिकॉर्ड सुरक्षित रहेगा। (फिलहाल यह पेज एक्टिव है और बिल्कुल सही चल रहा है!)</p>
+        </div>
+    </div>
+</body>
+</html>

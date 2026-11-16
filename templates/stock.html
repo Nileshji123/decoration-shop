@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>स्टॉक मैनेजमेंट - श्री डेकोरेशन</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; margin: 0; padding: 30px; color: #334155; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: #4f46e5; margin-bottom: 20px; }
+        .btn-back { display: inline-block; margin-bottom: 20px; background: #64748b; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border-bottom: 1px solid #cbd5e1; text-align: left; }
+        th { background-color: #f8fafc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'dashboard' %}" class="btn-back">← डैशबोर्ड पर लौटें</a>
+        <h2>📊 स्टॉक मैनेजमेंट (मौजूदा सामान)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>आईडी</th>
+                    <th>टाइटल</th>
+                    <th>कैटेगरी</th>
+                    <th>प्राइस</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>#{{ item.id }}</td>
+                    <td><strong>{{ item.title }}</strong></td>
+                    <td>{{ item.get_category_display|default:item.category }}</td>
+                    <td style="color: #16a34a; font-weight: bold;">₹{{ item.price }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; color: #64748b; padding: 20px;">स्टॉक में अभी कोई सामान नहीं है।</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

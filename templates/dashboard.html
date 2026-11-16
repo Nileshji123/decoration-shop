@@ -6,7 +6,7 @@
     <title>ओनर डैशबोर्ड | श्री डेकोरेशन</title>
     <style>
         :root {
-            --bg-base: #faf6f0;           /* वार्म क्रीम */
+            --bg-base: #faf6f0;         /* वार्म क्रीम */
             --card-bg: #ffffff;
             --accent-terracotta: #c85a32; /* रिच टेराकोटा */
             --accent-gold: #c28835;       /* वार्म गोल्ड */
@@ -300,9 +300,9 @@
             <ul class="side-nav">
                 <li><a href="{% url 'dashboard' %}" class="active">🏠 डैशबोर्ड होम</a></li>
                 <li><a href="{% url 'inventory' %}">📦 इन्वेंटरी</a></li>
-                <li><a href="#">📊 स्टॉक मैनेजमेंट</a></li>
-                <li><a href="#">📜 हिस्ट्री रिकॉर्ड्स</a></li>
-                <li><a href="#">👥 यूज़र डिटेल्स</a></li>
+                <li><a href="{% url 'stock' %}">📊 स्टॉक मैनेजमेंट</a></li>
+                <li><a href="{% url 'history' %}">📜 हिस्ट्री रिकॉर्ड्स</a></li>
+                <li><a href="{% url 'users' %}">👥 यूज़र डिटेल्स</a></li>
                 <li><a href="{% url 'home' %}" target="_blank">🌐 लाइव वेबसाइट</a></li>
             </ul>
         </div>
@@ -314,7 +314,7 @@
     <!-- मुख्य भाग -->
     <div class="main-wrapper">
         
-        <!-- टॉप हेडर (Right Corner Profile Meta) -->
+        <!-- टॉप हेडर -->
         <header>
             <div class="header-title">कंट्रोल डैशबोर्ड</div>
             
@@ -341,7 +341,7 @@
                     <div class="stat-icon">📦</div>
                     <div>
                         <span>एक्टिव इन्वेंटरी</span>
-                        <h3>{{ items_count|default:"0" }} सेट्स</h3>
+                        <h3>{{ total_items|default:"0" }} सेट्स</h3>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -386,7 +386,7 @@
                 </a>
 
                 <!-- 2. स्टॉक कार्ड -->
-                <a href="#" class="module-card">
+                <a href="{% url 'stock' %}" class="module-card">
                     <div>
                         <div class="module-top">
                             <span class="module-icon">📊</span>
@@ -400,7 +400,7 @@
                 </a>
 
                 <!-- 3. हिस्ट्री कार्ड -->
-                <a href="#" class="module-card">
+                <a href="{% url 'history' %}" class="module-card">
                     <div>
                         <div class="module-top">
                             <span class="module-icon">📜</span>
@@ -414,7 +414,7 @@
                 </a>
 
                 <!-- 4. यूज़र डिटेल कार्ड -->
-                <a href="#" class="module-card">
+                <a href="{% url 'users' %}" class="module-card">
                     <div>
                         <div class="module-top">
                             <span class="module-icon">👥</span>
