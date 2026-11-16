@@ -19,7 +19,7 @@ urlpatterns = [
     # 4. इन्वेंटरी मैनेजमेंट (ऐड, डिलीट, लिस्टिंग)
     path('inventory/', views.inventory_view, name='inventory'),
     
-    # 5. इन्वेंटरी अपडेट / एडिट पेज (जिसकी वजह से पहले एरर आ रही थी)
+    # 5. इन्वेंटरी अपडेट / एडिट पेज
     path('update-inventory/<int:pk>/', views.update_inventory_view, name='update_inventory'),
     
     # 6. स्टॉक मैनेजमेंट पेज
@@ -39,7 +39,9 @@ urlpatterns = [
     path('piyushprofile/', views.my_profile, name='my_profile'),
 ]
 
-# Media और Static files को लोकल सर्वर पर चलाने के लिए:
+# 🔴 मीडिया फाइल्स का पाथ (अब यह रेंडर पर DEBUG=False होने पर भी काम करेगा)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# स्टैटिक फाइल्स सिर्फ लोकल (DEBUG = True) के लिए
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
