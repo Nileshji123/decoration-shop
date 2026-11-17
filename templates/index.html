@@ -469,7 +469,6 @@
         <div class="items-grid">
             {% for item in items %}
             <div class="item-card">
-                <!-- Clicking media opens the booking/detail page -->
                 <a href="{% url 'booking_page' item.id %}" class="item-media-box">
                     {% if item.video %}
                         <video src="{{ item.video.url }}" autoplay loop muted playsinline></video>
@@ -489,7 +488,6 @@
                 <div class="item-details">
                     <div>
                         <span class="category-tag">{{ item.get_category_display }}</span>
-                        <!-- Clicking title also opens the booking/detail page -->
                         <a href="{% url 'booking_page' item.id %}" class="item-title-link">
                             <div class="item-title">{{ item.title }}</div>
                         </a>
@@ -500,7 +498,7 @@
                         <a href="https://wa.me/916263773097?text=Hello%20Shree%20Decoration,%20I%20want%20to%20book%20this%20service:%20{{ item.title }}%20(Price:%20₹{{ item.price }}).%20Please%20share%20payment%20details." 
                            target="_blank" 
                            class="btn-booking">
-                           Book Now →
+                            Book Now →
                         </a>
                     </div>
                 </div>

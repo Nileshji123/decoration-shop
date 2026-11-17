@@ -16,7 +16,7 @@ urlpatterns = [
     # 3. मेन डैशबोर्ड (कंट्रोल रूम)
     path('piyush-dashbored/', views.dashboard, name='dashboard'),
     
-    # 4. इन्वेंटरी मैनेजमेंट (ऐड, डिलीट, लिस्टिंग)
+    # 4. इन्वेंटरी मैनेजमेंट
     path('inventory/', views.inventory_view, name='inventory'),
     
     # 5. इन्वेंटरी अपडेट / एडिट पेज
@@ -31,7 +31,7 @@ urlpatterns = [
     # 8. यूजर डेटा / ग्राहक डिटेल्स पेज
     path('users/', views.users_view, name='users'),
     
-    # 9. बुकिंग / डिटेल पेज (कस्टमर के लिए)
+    # 9. बुकिंग / डिटेल पेज
     path('booking/<int:pk>/', views.booking_page, name='booking_page'),
 
     # 10. पासवर्ड रिसेट और प्रोफाइल
@@ -39,9 +39,8 @@ urlpatterns = [
     path('piyushprofile/', views.my_profile, name='my_profile'),
 ]
 
-# 🔴 मीडिया फाइल्स का पाथ (अब यह रेंडर पर DEBUG=False होने पर भी काम करेगा)
+# मीडिया और स्टैटिक फाइल्स का पाथ रूट
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# स्टैटिक फाइल्स सिर्फ लोकल (DEBUG = True) के लिए
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
