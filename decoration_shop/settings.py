@@ -108,7 +108,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # यदि तूने Render के Environment Variables में Cloudinary की डिटेल्स नहीं डाली हैं, 
 # तो यह नीचे दिए गए डिफ़ॉल्ट डेमो/टेस्ट अकाउंट पर काम करेगा (या तू अपने क्रेडेंशियल्स डाल सकता है):
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'demo'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '123456789012345'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'abcdefghijklmnopqrstuvwxyz'),
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
